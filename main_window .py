@@ -703,9 +703,9 @@ def openyear(window):
 
                 plt.rcParams["axes.prop_cycle"] = plt.cycler(color =["#a3eff0" ,"#dac27c" ,"#a3c8f0", "#a3ddf0", "#a3c8f0"])
                 fig6, ax6 = plt.subplots()
-                ax6.bar(["ALB","BG","IT","MK","TR"],[year_ptrs[6][0], year_ptrs[6][1], year_ptrs[6][2], year_ptrs[6][3], year_ptrs[6][4]])
+                ax6.bar(["ALB","BG","IT","MK","TR"],[year_ptrs[6][0]/100, year_ptrs[6][1]/100, year_ptrs[6][2]/100, year_ptrs[6][3]/100, year_ptrs[6][4]/100])
                 ax6.set_xlabel("Countries")
-                ax6.set_ylabel("Maximum Energy Exchange (MWh)")
+                ax6.set_ylabel("Maximum Energy Exchange (MWh)x100")
                 fig6.set_figheight(4)
                 fig6.set_figwidth(5)
                 canvas6 = FigureCanvasTkAgg(fig6, root_max)
