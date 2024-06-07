@@ -47,29 +47,40 @@ def month(month,year):
     mhden="0"
     if (month<=9):
         mhden = "0"+str(month)
-
+        date_start = f"01.{mhden}.{year}"
+    else:
+        date_start = f"01.{month}.{year}"
 
 
     for j in time:
-        if j == f"01.{mhden}.{year}":
+        if j == date_start:
             break
         else:
             index_start += 1
+
     mhden="0"
+
     month=month+1
+
     if (month<=9):
         mhden = "0"+str(month)
+        date_end = f"01.{mhden}.{year}"
+    elif(month>12):
+        date_end = f"01.01.{year+1}"
+    else:
+        date_end = f"01.{month}.{year}"
 
     for j in time:
-        if j == f"01.{mhden}.{year}":
+        if j == date_end:
             break
         else:
             index_end += 1
             
     save_index_start = index_start
    
-    
 
+
+        
     for i in range(0,5):
         index_start = save_index_start 
         mult = 1
@@ -77,12 +88,15 @@ def month(month,year):
             day_hours = 24
             
             for j in inc_energy[i]:
-                if j>=0:
+                if j>0:
+
                     if index_start == -2 and day_hours != 0:
                         total_list[0] += j
                         day_hours -= 1
                     else:
                         index_start -= 1
+                else:
+                    index_start-=1
             index_start = (save_index_start + 27 * mult)
             mult += 1
      
@@ -95,17 +109,21 @@ def month(month,year):
             day_hours=24
             
             for j in out_energy[i]:
-                if j >= 0:
+                if j > 0:
                     if index_start == -2 and day_hours != 0:
                         total_list[1] += j
                         day_hours -= 1
                     else:
                         index_start -= 1
+                else:
+                    index_start-=1
             index_start = (save_index_start + 27 * mult)
             mult+=1
             
     
+    
     total_list[2] = total_list[1] - total_list[0]
+
 
 
     for i in range(0,5):
@@ -115,12 +133,14 @@ def month(month,year):
             day_hours = 24
             
             for j in inc_energy[i]:
-                if j >= 0:
+                if j > 0:
                     if index_start == -2 and day_hours !=0:
                         ptrs[i+1][0] += j
                         day_hours -= 1
                     else:
                         index_start -= 1
+                else:
+                    index_start-=1
             index_start= (save_index_start + 27 * mult)
             mult += 1
          
@@ -131,12 +151,14 @@ def month(month,year):
             day_hours = 24
             
             for j in out_energy[i]:
-                if j >= 0:
+                if j > 0:
                     if index_start == -2 and day_hours != 0:
                         ptrs[i+1][1] += j
                         day_hours -= 1
                     else:
                         index_start-=1
+                else:
+                    index_start-=1
             index_start= (save_index_start + 27 * mult)
             mult += 1
     
@@ -151,13 +173,15 @@ def month(month,year):
             day_hours = 24
             
             for j in out_energy[i]:
-                if j >= 0:
+                if j > 0:
                     if index_start == -2 and day_hours != 0:
                         if j>ptrs[6][i]:
                             ptrs[6][i] = j
                         day_hours -= 1
                     else:
                         index_start-=1
+                else:
+                    index_start-=1
             index_start= (save_index_start + 27 * mult)
             mult += 1
 
@@ -169,14 +193,17 @@ def month(month,year):
             day_hours = 24
             
             for j in inc_energy[i]:
-                if j >= 0:
+                if j > 0:
                     if index_start == -2 and day_hours != 0:
                         if j>ptrs[6][i]:
                             ptrs[6][i] = j
                         day_hours -= 1
                     else:
                         index_start-=1
+                else:
+                    index_start-=1
             index_start= (save_index_start + 27 * mult)
             mult += 1
 
-    return ptrs
+    return ptrs 
+
